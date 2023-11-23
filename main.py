@@ -12,18 +12,27 @@ def start_new_draw():
     global pot_size, draw_started
     pot_size = 100
     draw_started = True
+    print(f"New Raffle draw has been started. Initial port size: ${pot_size}")
+    press_any_key_to_continue()
 
 
 def buy_tickets():
     print("Enter your name, number of tickets to purchase (for e.g. a valid input will be **James,1** )")
-    print("\n\n")
+    print()
+    press_any_key_to_continue()
 
 
 def run_raffle():
     print("STUB: Getting winning ticket")
     print("STUB: Getting winners")
     print("STUB: Display Winners")
-    print("\n\n")
+    print()
+    press_any_key_to_continue()
+
+
+def press_any_key_to_continue():
+    input("Press any key to return to main menu")
+
 
 
 def main_menu():
