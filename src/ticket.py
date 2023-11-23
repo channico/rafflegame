@@ -1,9 +1,4 @@
-import random
-
-
-def generate_numbers():
-    # Generate a list of 5 unique random numbers between 1 and 15
-    return random.sample(range(1, 16), 5)
+from number_picker import generate_numbers
 
 
 class Ticket:
