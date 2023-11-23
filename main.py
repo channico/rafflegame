@@ -12,7 +12,7 @@ def start_new_draw():
     global pot_size, draw_started
     pot_size = 100
     draw_started = True
-    print(f"New Raffle draw has been started. Initial port size: ${pot_size}")
+    print(f"New Raffle draw has been started. Initial pot size: ${pot_size}")
     press_any_key_to_continue()
 
 
