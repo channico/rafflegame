@@ -8,7 +8,7 @@ def generate_numbers():
 
 class Ticket:
     def __init__(self, numbers):
-        self.numbers = numbers
+        self.numbers = sorted(numbers)
 
     @classmethod
     def generate_ticket(cls):
