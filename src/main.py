@@ -1,18 +1,16 @@
 # This is a sample Python script.
+from raffle import Raffle
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
-# TODO: Refactor this into a separate class
-pot_size = 100
-draw_started = False
+raffle = None
 
 
 def start_new_draw():
-    global pot_size, draw_started
-    pot_size = 100
-    draw_started = True
-    print(f"New Raffle draw has been started. Initial pot size: ${pot_size}")
+    global raffle
+    raffle = Raffle()
+    print(f"New Raffle draw has been started. Initial pot size: ${raffle.pot_size}")
     press_any_key_to_continue()
 
 
@@ -36,8 +34,8 @@ def press_any_key_to_continue():
 
 def main_menu():
     print("Welcome to My Raffle app")
-    if draw_started:
-        print(f"Status: Draw has is ongoing. Raffle pot size is ${pot_size}")
+    if raffle:
+        print(f"Status: Draw has is ongoing. Raffle pot size is ${raffle.pot_size}")
     else:
         print("Status: Draw has not started")
     print()
