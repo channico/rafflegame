@@ -1,5 +1,6 @@
 # This is a sample Python script.
 from constants import MAX_TICKETS
+from number_picker import generate_numbers
 from raffle import Raffle
 
 # Press ⌃R to execute it or replace it with your code.
@@ -44,9 +45,24 @@ def print_ticket_numbers(issued_tickets):
 
 
 def run_raffle():
-    print("STUB: Getting winning ticket")
-    print("STUB: Getting winners")
-    print("STUB: Display Winners")
+    print("Getting winning ticket")
+    winning_numbers = generate_numbers()
+
+    print(f"Winning Ticket is: {winning_numbers}")
+
+    print("Group 2 Winners:")
+    print()
+
+    print("Group 3 Winners:")
+    print()
+
+    print("Group 4 Winners:")
+    print()
+
+    print("Group 5 Winners (Jackpot):")
+    print()
+
+
     print()
     press_any_key_to_continue()
 
