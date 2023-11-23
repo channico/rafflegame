@@ -12,8 +12,8 @@ class Ticket:
         numbers = generate_numbers()
         return cls(numbers, name)
 
-    def display_ticket(self):
-        print("Lottery Ticket Numbers:", self.numbers)
+    def __repr__(self):
+        return f"Raffle Ticket Numbers: {self.numbers} - {self.name}"
 
     def check_numbers(self, other_ticket):
         # Check if the numbers on two lottery tickets are equal

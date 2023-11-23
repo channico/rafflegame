@@ -49,6 +49,7 @@ def run_raffle():
     winning_numbers = generate_numbers()
 
     print(f"Winning Ticket is: {winning_numbers}")
+    raffle.find_winners(winning_numbers)
 
     print("Group 2 Winners:")
     print()

@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from raffle import Raffle
+from ticket import Ticket
 
 
 class TestRaffle(TestCase):
@@ -21,3 +22,15 @@ class TestRaffle(TestCase):
         self.raffle.issue_raffle_ticket()
         self.raffle.display_raffle_tickets()
 
+    def test_find_winners(self):
+        self.raffle.log_raffle_ticket(Ticket([1, 2, 3, 4, 5], "Adam"))
+        self.raffle.log_raffle_ticket(Ticket([1, 2, 3, 4, 6], "Benny"))
+        self.raffle.log_raffle_ticket(Ticket([1, 2, 3, 6, 7], "Carter"))
+        self.raffle.log_raffle_ticket(Ticket([1, 2, 6, 7, 8], "Dennis"))
+        self.raffle.log_raffle_ticket(Ticket([1, 3, 6, 7, 8], "Edmund"))
+
+        winners = self.raffle.find_winners([1, 2, 3, 4, 5])
+        print(winners[2])
+        print(winners[3])
+        print(winners[4])
+        print(winners[5])
