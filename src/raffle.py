@@ -5,8 +5,9 @@ TICKET_VALUE = 5
 
 
 class Raffle:
-    def __init__(self):
+    def __init__(self, snowball=0):
         self.raffle_tickets = []
+        self.__pot_size = INITIAL_POT + snowball
 
     def issue_raffle_ticket(self):
         ticket = Ticket.generate_ticket()
@@ -21,5 +22,5 @@ class Raffle:
     @property
     def pot_size(self):
         # Calculate the total pot size based on the number of raffle tickets issued
-        return INITIAL_POT + len(self.raffle_tickets) * TICKET_VALUE  # Each ticket costs 10 units
+        return self.__pot_size + len(self.raffle_tickets) * TICKET_VALUE  # Each ticket costs 10 units
 

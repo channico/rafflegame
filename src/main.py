@@ -5,11 +5,12 @@ from raffle import Raffle
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 raffle = None
+snowball = 0
 
 
 def start_new_draw():
-    global raffle
-    raffle = Raffle()
+    global raffle, snowball
+    raffle = Raffle(snowball)
     print(f"New Raffle draw has been started. Initial pot size: ${raffle.pot_size}")
     press_any_key_to_continue()
 
