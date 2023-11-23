@@ -1,7 +1,5 @@
+from constants import INITIAL_POT, TICKET_VALUE
 from ticket import Ticket
-
-INITIAL_POT = 100
-TICKET_VALUE = 5
 
 
 class Raffle:

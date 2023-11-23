@@ -1,9 +1,9 @@
 # This is a sample Python script.
+from constants import MAX_TICKETS
 from raffle import Raffle
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-MAX_TICKETS = 5
 
 raffle: Raffle = None
 snowball = 0
@@ -20,7 +20,7 @@ def buy_tickets():
     global raffle
 
     print("Enter your name, number of tickets to purchase")
-    split_input = input("input (e.g. James, 1: ").split(',')
+    split_input = input("input (e.g. James, 1): ").split(',')
     name = split_input[0].strip()
     number_of_tickets = int(split_input[1].strip())
 
@@ -32,11 +32,15 @@ def buy_tickets():
         issued_tickets.append(raffle.issue_raffle_ticket(name))
 
     print(f"Hi {name}, you have purchased {len(issued_tickets)} ticket(s)-")
-    for i, ticket in enumerate(issued_tickets, start=1):
-        print(f"Ticket {i}: {ticket.numbers}")
+    print_ticket_numbers(issued_tickets)
 
     print()
     press_any_key_to_continue()
+
+
+def print_ticket_numbers(issued_tickets):
+    for i, ticket in enumerate(issued_tickets, start=1):
+        print(f"Ticket {i}: {ticket.numbers}")
 
 
 def run_raffle():
@@ -54,7 +58,7 @@ def press_any_key_to_continue():
 def main_menu():
     print("Welcome to My Raffle app")
     if raffle:
-        print(f"Status: Draw has is ongoing. Raffle pot size is ${raffle.pot_size}")
+        print(f"Status: Draw is ongoing. Raffle pot size is ${raffle.pot_size}")
     else:
         print("Status: Draw has not started")
     print()
