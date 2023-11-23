@@ -34,7 +34,6 @@ def press_any_key_to_continue():
     input("Press any key to return to main menu")
 
 
-
 def main_menu():
     print("Welcome to My Raffle app")
     if draw_started:
