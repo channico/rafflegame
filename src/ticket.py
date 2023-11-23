@@ -7,14 +7,15 @@ def generate_numbers():
 
 
 class Ticket:
-    def __init__(self, numbers):
+    def __init__(self, numbers, name="Anonymous"):
         self.numbers = sorted(numbers)
+        self.name = name
 
     @classmethod
-    def generate_ticket(cls):
+    def generate_ticket(cls, name="Anonymous"):
         # Generate a list of 5 unique random numbers between 1 and 15
         numbers = generate_numbers()
-        return cls(numbers)
+        return cls(numbers, name)
 
     def display_ticket(self):
         print("Lottery Ticket Numbers:", self.numbers)
