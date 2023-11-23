@@ -3,8 +3,9 @@ from raffle import Raffle
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+MAX_TICKETS = 5
 
-raffle = None
+raffle: Raffle = None
 snowball = 0
 
 
@@ -16,7 +17,24 @@ def start_new_draw():
 
 
 def buy_tickets():
-    print("Enter your name, number of tickets to purchase (for e.g. a valid input will be **James,1** )")
+    global raffle
+
+    print("Enter your name, number of tickets to purchase")
+    split_input = input("input (e.g. James, 1: ").split(',')
+    name = split_input[0].strip()
+    number_of_tickets = int(split_input[1].strip())
+
+    # Max tickets is 5
+    number_of_tickets = min(number_of_tickets, MAX_TICKETS)
+
+    issued_tickets = []
+    for i in range(number_of_tickets):
+        issued_tickets.append(raffle.issue_raffle_ticket(name))
+
+    print(f"Hi {name}, you have purchased {len(issued_tickets)} ticket(s)-")
+    for i, ticket in enumerate(issued_tickets, start=1):
+        print(f"Ticket {i}: {ticket.numbers}")
+
     print()
     press_any_key_to_continue()
 

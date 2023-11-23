@@ -9,8 +9,8 @@ class Raffle:
         self.raffle_tickets = []
         self.__pot_size = INITIAL_POT + snowball
 
-    def issue_raffle_ticket(self):
-        ticket = Ticket.generate_ticket()
+    def issue_raffle_ticket(self, name="Anonymous"):
+        ticket = Ticket.generate_ticket(name)
         self.raffle_tickets.append(ticket)
         return ticket
 
