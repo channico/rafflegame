@@ -24,3 +24,20 @@ class TestTicket(TestCase):
         ticket1 = Ticket([1, 2, 3, 4, 5])
         ticket2 = Ticket([5, 4, 3, 2, 1])
         self.assertTrue(ticket1.check_numbers(ticket2))
+
+    def test_check_group5_winner(self):
+        ticket1 = Ticket([1, 2, 3, 4, 5])
+        self.assertEqual(5, ticket1.check_group_winner([1, 2, 3, 4, 5]))
+
+    def test_check_group4_winner(self):
+        ticket1 = Ticket([1, 2, 3, 4, 5])
+        self.assertEqual(4, ticket1.check_group_winner([1, 2, 3, 4, 6]))
+
+    def test_check_group3_winner(self):
+        ticket1 = Ticket([1, 2, 3, 4, 5])
+        self.assertEqual(3, ticket1.check_group_winner([1, 2, 3, 6, 7]))
+
+    def test_check_group2_winner(self):
+        ticket1 = Ticket([1, 2, 3, 4, 5])
+        self.assertEqual(2, ticket1.check_group_winner([1, 2, 6, 7, 8]))
+

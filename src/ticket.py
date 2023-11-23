@@ -18,3 +18,11 @@ class Ticket:
     def check_numbers(self, other_ticket):
         # Check if the numbers on two lottery tickets are equal
         return self.numbers == other_ticket.numbers
+
+    def check_group_winner(self, winning_numbers):
+        ticket_set = set(self.numbers)
+        winning_set = set(winning_numbers)
+
+        matched_numbers = ticket_set.intersection(winning_set)
+
+        return len(matched_numbers)
