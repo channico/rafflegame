@@ -14,6 +14,7 @@ snowball = 0
 def start_new_draw():
     global raffle, snowball
     raffle = Raffle(snowball)
+    snowball = 0
     print(f"New Raffle draw has been started. Initial pot size: ${raffle.pot_size}")
     press_any_key_to_continue()
 
@@ -46,6 +47,8 @@ def print_ticket_numbers(issued_tickets):
 
 
 def run_raffle():
+    global raffle
+
     print("Getting winning ticket")
     winning_numbers = generate_numbers()
 
@@ -68,16 +71,22 @@ def run_raffle():
     print_group_winners(winners, 5)
     print()
 
+    raffle = None
     press_any_key_to_continue()
 
 
 def print_group_winners(winners, group):
+    global snowball
+
+    group_reward = calculate_group_reward(group, raffle.pot_size)
+
     if len(winners[group]) == 0:
         print("Nil")
+        snowball += group_reward
         return
 
     winner_dict = aggregate_tickets_by_name(winners[group])
-    group_reward = calculate_group_reward(group, raffle.pot_size)
+
     for winner in winner_dict:
         share = calculate_winning_share(winner_dict[winner], winner_dict.total(), group_reward)
         print(f"{winner} with {winner_dict[winner]} winning ticket(s) - ${share:.2f}")
