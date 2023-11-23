@@ -1,4 +1,5 @@
 # This is a sample Python script.
+from reward import *
 from constants import MAX_TICKETS
 from number_picker import generate_numbers
 from raffle import Raffle
@@ -49,23 +50,37 @@ def run_raffle():
     winning_numbers = generate_numbers()
 
     print(f"Winning Ticket is: {winning_numbers}")
-    raffle.find_winners(winning_numbers)
+    winners = raffle.find_winners(winning_numbers)
 
     print("Group 2 Winners:")
+    print_group_winners(winners, 2)
     print()
 
     print("Group 3 Winners:")
+    print_group_winners(winners, 3)
     print()
 
     print("Group 4 Winners:")
+    print_group_winners(winners, 4)
     print()
 
     print("Group 5 Winners (Jackpot):")
+    print_group_winners(winners, 5)
     print()
 
-
-    print()
     press_any_key_to_continue()
+
+
+def print_group_winners(winners, group):
+    if len(winners[group]) == 0:
+        print("Nil")
+        return
+
+    winner_dict = aggregate_tickets_by_name(winners[group])
+    group_reward = calculate_group_reward(group, raffle.pot_size)
+    for winner in winner_dict:
+        share = calculate_winning_share(winner_dict[winner], winner_dict.total(), group_reward)
+        print(f"{winner} with {winner_dict[winner]} winning ticket(s) - ${share:.2f}")
 
 
 def press_any_key_to_continue():
