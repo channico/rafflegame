@@ -16,8 +16,12 @@ class Lottery:
         self.new_draw = Raffle(self.snowball)
         self.snowball = 0
 
-    def issue_tickets(self, name) -> list[Ticket]:
-        pass
+    def issue_tickets(self, name, number_of_tickets) -> list[Ticket]:
+        issued_tickets = []
+        for i in range(number_of_tickets):
+            issued_tickets.append(self.new_draw.issue_raffle_ticket(name))
+
+        return issued_tickets
 
     def run_draw(self):
         self.winning_numbers = generate_numbers()

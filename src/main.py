@@ -16,24 +16,25 @@ def start_new_draw(lotto):
 
 
 def buy_tickets(lotto):
-
-    print("Enter your name, number of tickets to purchase")
-    split_input = input("input (e.g. James, 1): ").split(',')
-    name = split_input[0].strip()
-    number_of_tickets = int(split_input[1].strip())
-
-    # Max tickets is 5
-    number_of_tickets = min(number_of_tickets, MAX_TICKETS)
-
-    issued_tickets = []
-    for i in range(number_of_tickets):
-        issued_tickets.append(lotto.new_draw.issue_raffle_ticket(name))
+    name, number_of_tickets = name_tickets_input()
+    issued_tickets = lotto.issue_tickets(name, number_of_tickets)
 
     print(f"Hi {name}, you have purchased {len(issued_tickets)} ticket(s)-")
     print_ticket_numbers(issued_tickets)
-
     print()
+
     press_any_key_to_continue()
+
+
+def name_tickets_input():
+    print("Enter your name, number of tickets to purchase")
+    split_input = input("input (e.g. James, 1): ").split(',')
+
+    name = split_input[0].strip()
+    number_of_tickets = int(split_input[1].strip())
+    number_of_tickets = min(number_of_tickets, MAX_TICKETS)     # Max tickets is MAX_TICKETS
+
+    return name, number_of_tickets
 
 
 def print_ticket_numbers(issued_tickets):
@@ -68,15 +69,12 @@ def run_raffle(lotto):
 
 
 def print_group_winners(pot_size, winners, group):
-
-    group_reward = calculate_group_reward(group, pot_size)
-
     if len(winners[group]) == 0:
         print("Nil")
         return
 
     winner_dict = aggregate_tickets_by_name(winners[group])
-
+    group_reward = calculate_group_reward(group, pot_size)
     for winner in winner_dict:
         share = calculate_winning_share(winner_dict[winner], winner_dict.total(), group_reward)
         print(f"{winner} with {winner_dict[winner]} winning ticket(s) - ${share:.2f}")
