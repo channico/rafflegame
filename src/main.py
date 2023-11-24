@@ -1,10 +1,6 @@
-# This is a sample Python script.
 from lottery import Lottery
 from reward import *
 from constants import MAX_TICKETS
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 lottery = Lottery()
 
@@ -115,7 +111,6 @@ def get_response():
     return choice
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     while True:
         main_menu(lottery)
@@ -127,5 +122,3 @@ if __name__ == '__main__':
         if c == 3:
             run_raffle(lottery)
         print("")
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
