@@ -1,26 +1,21 @@
 # This is a sample Python script.
+from lottery import Lottery
 from reward import *
 from constants import MAX_TICKETS
-from number_picker import generate_numbers
-from raffle import Raffle
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
-raffle: Raffle = None
-snowball = 0
+lottery = Lottery()
 
 
-def start_new_draw():
-    global raffle, snowball
-    raffle = Raffle(snowball)
-    snowball = 0
-    print(f"New Raffle draw has been started. Initial pot size: ${raffle.pot_size}")
+def start_new_draw(lotto):
+    lottery.start_new_draw()
+    print(f"New Raffle draw has been started. Initial pot size: ${lotto.new_draw.pot_size}")
     press_any_key_to_continue()
 
 
-def buy_tickets():
-    global raffle
+def buy_tickets(lotto):
 
     print("Enter your name, number of tickets to purchase")
     split_input = input("input (e.g. James, 1): ").split(',')
@@ -32,7 +27,7 @@ def buy_tickets():
 
     issued_tickets = []
     for i in range(number_of_tickets):
-        issued_tickets.append(raffle.issue_raffle_ticket(name))
+        issued_tickets.append(lotto.new_draw.issue_raffle_ticket(name))
 
     print(f"Hi {name}, you have purchased {len(issued_tickets)} ticket(s)-")
     print_ticket_numbers(issued_tickets)
@@ -46,43 +41,38 @@ def print_ticket_numbers(issued_tickets):
         print(f"Ticket {i}: {ticket.numbers}")
 
 
-def run_raffle():
-    global raffle
+def run_raffle(lotto):
 
     print("Getting winning ticket")
-    winning_numbers = generate_numbers()
+    lotto.run_draw()
 
-    print(f"Winning Ticket is: {winning_numbers}")
-    winners = raffle.find_winners(winning_numbers)
+    print(f"Winning Ticket is: {lotto.winning_numbers}")
 
     print("Group 2 Winners:")
-    print_group_winners(winners, 2)
+    print_group_winners(lotto.pot_size, lotto.winners, 2)
     print()
 
     print("Group 3 Winners:")
-    print_group_winners(winners, 3)
+    print_group_winners(lotto.pot_size, lotto.winners, 3)
     print()
 
     print("Group 4 Winners:")
-    print_group_winners(winners, 4)
+    print_group_winners(lotto.pot_size, lotto.winners, 4)
     print()
 
     print("Group 5 Winners (Jackpot):")
-    print_group_winners(winners, 5)
+    print_group_winners(lotto.pot_size, lotto.winners, 5)
     print()
 
-    raffle = None
     press_any_key_to_continue()
 
 
-def print_group_winners(winners, group):
-    global snowball
+def print_group_winners(pot_size, winners, group):
 
-    group_reward = calculate_group_reward(group, raffle.pot_size)
+    group_reward = calculate_group_reward(group, pot_size)
 
     if len(winners[group]) == 0:
         print("Nil")
-        snowball += group_reward
         return
 
     winner_dict = aggregate_tickets_by_name(winners[group])
@@ -96,10 +86,10 @@ def press_any_key_to_continue():
     input("Press any key to return to main menu")
 
 
-def main_menu():
+def main_menu(lotto):
     print("Welcome to My Raffle app")
-    if raffle:
-        print(f"Status: Draw is ongoing. Raffle pot size is ${raffle.pot_size}")
+    if lotto.new_draw:
+        print(f"Status: Draw is ongoing. Raffle pot size is ${lotto.new_draw.pot_size}")
     else:
         print("Status: Draw has not started")
     print()
@@ -130,14 +120,14 @@ def get_response():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     while True:
-        main_menu()
+        main_menu(lottery)
         c = get_response()
         if c == 1:
-            start_new_draw()
+            start_new_draw(lottery)
         if c == 2:
-            buy_tickets()
+            buy_tickets(lottery)
         if c == 3:
-            run_raffle()
+            run_raffle(lottery)
         print("")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
