@@ -18,7 +18,7 @@ class Raffle:
     def display_raffle_tickets(self):
         print("Raffle Tickets:")
         for index, ticket in enumerate(self.raffle_tickets, start=1):
-            print(f"Ticket {index}: {ticket.numbers} - owner: {ticket.name}")
+            print(f"Ticket {index}: {ticket}")
 
     def find_winners(self, winning_numbers):
         winners = {2: [], 3: [], 4: [], 5: []}

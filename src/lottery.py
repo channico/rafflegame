@@ -34,6 +34,7 @@ class Lottery:
         # Reset the raffle
         self.new_draw = None
 
+    # Snowball calculation is dependent on the assumption that group prizes are snowballed
     def calculate_snowball(self):
         snowball = 0
         for group in range(2, 6):
